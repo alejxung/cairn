@@ -1,0 +1,39 @@
+# Describes the cairn package to Python tooling: its name, the Python version it needs,
+# the libraries it depends on, and the settings for pytest and ruff. uv reads this file
+# to build the virtual environment and to write the uv.lock lockfile, so this is the one
+# place that decides what gets installed.
+
+[project]
+name = "cairn"
+version = "0.1.0"
+description = "Records why a lab made each change, linked to the experiment runs behind it."
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "pydantic-settings>=2.5",
+    "sqlalchemy>=2.0",
+    "psycopg[binary]>=3.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "httpx>=0.27",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ 
